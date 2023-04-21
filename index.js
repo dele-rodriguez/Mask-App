@@ -124,37 +124,35 @@ app.route("/login")
     .get((req , res ) => {
         res.render("login" , {messages : req.flash() });
     })
-    .post((req , res ) => {
+    .post((req , res , next ) => {
         const user = new User({
             username: req.body.username ,
             password: req.body.password
         });
 
-        req.login(user , (err) => {
+        passport.authenticate('local', (err, user, info) => {
             if (err) {
-                console.log(err);
-                res.redirect('/login');
-            } else {
-                passport.authenticate('local', (err, user, info) => {
-                if (err) {
-                    console.log(err);
-                    res.redirect('/login');
-                }
-                if (!user) {
-                    console.log(info.name);
-                    if(info.name === "IncorrectPasswordError") {
-                        req.flash('error' , "incorrect Password");
-                        res.redirect("/login");
-                    } else {
-                        req.flash('error' , "Username does not exist");
-                        res.redirect('/login');
-                    }
-                } else {
-                    res.redirect('/userhome');
-                }
-                })(req, res);
+              return next(err);
             }
-        });
+            if (!user) {
+              // handle incorrect username or password
+                if (info.name === "IncorrectPasswordError") {
+                    req.flash("error" , "Incorrect password");
+                    res.redirect("/login");
+                } else {
+                    req.flash("error" , "Username Does not exist");
+                    res.redirect("/login");
+                }
+            } else {
+                req.logIn(user, (err) => {
+                    if (err) {
+                      return next(err);
+                    }
+                    // handle successful login
+                    return res.redirect('/userhome');
+                  });
+            }
+        })(req, res, next);
 });
 
 app.route("/userhome")
