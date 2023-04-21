@@ -1,0 +1,18 @@
+<form action="/register" method="post">
+    <div>
+        <label for="text">Username</label>
+        <input type="text" name="username">
+    </div>
+    <% if (messages.error) { %>
+        <div>
+            <p> <%= messages.error %> </p>
+        </div>
+    <% } %>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" name="password">
+    </div>
+    <button type="submit">Register</button>
+</form>
+
+<a href="/login">Already have an account? Login!</a>
