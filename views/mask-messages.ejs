@@ -1,0 +1,19 @@
+<p> <%=username %> You're in the mask-message route</p>
+
+<form action="/users/<%= username %>/sendmask" method="post">
+    <div>
+        <label for="mask-message">Mask Message</label>
+        <input type="text" name="maskMessage">
+    </div>
+    <button type="submit">Hide behind the mask</button>
+</form>
+
+<% if (messages.error) { %>
+    <div>
+        <p> <%= messages.error %> </p>
+    </div>
+<% } else { %>
+    <div>
+        <p> <%= messages.success %> </p>
+    </div>
+<% } %>

@@ -62,11 +62,28 @@ const maskUserSchema = new mongoose.Schema({
     },
 });
 
+const maskMessageSchema = new mongoose.Schema({
+    recipientUsername: {
+        type: String,
+        unique: [true , "Username already in database"]
+    },
+    maskMessages: [{
+        maskMessage: {
+            type: String,
+        },
+        sentAt: {
+            type: Date,
+            default: Date.now,
+        }
+    }],
+});
+
 maskUserSchema.plugin(passportLocalMongoose);
 maskUserSchema.plugin(findOrCreate);
 
 // collection creation
 const User = mongoose.model('MaskUser' , maskUserSchema);
+const Mask = mongoose.model("MaskMessage" , maskMessageSchema);
 
 
 passport.use(User.createStrategy());
@@ -87,16 +104,15 @@ passport.deserializeUser((id, done) => {
 });
 
 app.route("/")
-.get((req , res) => {
-    res.render("home" );
+    .get((req , res) => {
+        res.render("home" );
 });
 
 app.route("/register")
-.get((req , res) => {
-    res.render("register" , { messages: req.flash() });
-})
-.post((req , res) => {
-    console.log(req.body.password);
+    .get((req , res) => {
+        res.render("register" , { messages: req.flash() });
+    })
+    .post((req , res) => {
     User.register({username: req.body.username}, req.body.password , (err , user) => {
         if (err) {
             console.log("registration err");
@@ -114,7 +130,7 @@ app.route("/register")
         } else {
             console.log("registration successful");
             passport.authenticate("local")(req , res , () => {
-                res.redirect("/userhome");
+                res.redirect("/users/" + req.body.username);
             });
         }
     });
@@ -148,22 +164,86 @@ app.route("/login")
                     if (err) {
                       return next(err);
                     }
+                    console.log(user.username);
                     // handle successful login
-                    return res.redirect('/userhome');
+                    return res.redirect('/users/' + user.username);
                   });
             }
         })(req, res, next);
 });
 
-app.route("/userhome")
-.get((req , res) => {
-    if (req.isAuthenticated()) {
-        console.log("user is authenticated");
-        res.render("userhome");
-    } else {
-        console.log("User is not authenticated");
-        res.redirect("/register");
-    }
+app.route("/users/:username")
+    .get((req , res) => {
+        if (req.isAuthenticated()) {
+            console.log("user is authenticated");
+            res.render(
+                "userhome" , 
+                {
+                    username: req.params.username,
+
+                }
+            );
+        } else {
+            console.log("User is not authenticated");
+            res.redirect("/register");
+        }
+});
+
+app.route("/users/:username/sendmask")
+    .get((req , res) => {
+        res.render(
+            "mask-messages" , 
+            {   username: req.params.username,
+                messages: req.flash() 
+            }
+        );
+    })
+    .post((req ,res) => {
+        const maskMessage = req.body.maskMessage;
+        const username = req.params.username;
+        console.log(username);
+
+        const message1 = new Mask ({
+            recipientUsername: username,
+            maskMessages: [{
+                maskMessage: maskMessage
+            }]
+        });
+
+        Mask.findOne({recipientUsername: req.params.username})
+            .then((foundMask) => {
+                if(!foundMask) {
+                    if (req.body.maskMessage.length > 0) {
+                        message1.save();
+                        req.flash("success" , "You are the first to send this user a message!");
+                        res.redirect("/users/" + req.params.username + "/sendmask");
+                    } else {
+                        req.flash("error" , "you can't send an empty message!");
+                        res.redirect("/users/" + req.params.username + "/sendmask");
+                    }
+                } else if (foundMask) {
+                    console.log("foundMask: " + foundMask.recipientUsername + " = " + req.params.username);
+                    if(foundMask.recipientUsername === req.params.username) {
+                        if (req.body.maskMessage.length > 0) {
+                            foundMask.maskMessages.push({maskMessage: req.body.maskMessage});
+                            foundMask.save();
+                            req.flash("success" , "Your new message has been sucessfully sent!");
+                            res.redirect("/users/" + req.params.username + "/sendmask");
+                        } else{
+                            req.flash("error" , "you can't send an empty message!");
+                            res.redirect("/users/" + req.params.username + "/sendmask");
+                        }
+                    } 
+                }  else {
+                    req.flash("error" , "There was an error sending your message!");
+                    res.redirect("/users/" + req.params.username + "/sendmask");
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                req.flash("error" , "There was an error sending your message!");
+                res.redirect("/users/" + req.params.username + "/sendmask");
+        });  
 });
 
 app.route("/logout")
