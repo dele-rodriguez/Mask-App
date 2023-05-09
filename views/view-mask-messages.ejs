@@ -1,10 +1,16 @@
 <p> <%= username %>  you can view your sent messages here</p>
 
 <div>
-    <% userMessages.map((message , index) => { %>
+    <% if(userMessages) { %>
+        <% userMessages.map((message , index) => { %>
+            <div>
+                <p><%= message.maskMessage %></p>
+                <p><%= message.sentAt %> </p>
+            </div>
+        <% }) %>
+    <% } else { %>
         <div>
-            <p><%= message.maskMessage %></p>
-            <p><%= message.sentAt %> </p>
+            <p>Oops! 😅 No one has sent you a message in last 3 Days! Share your profile link and check back later again!</p>
         </div>
-    <% }) %>
+    <% } %>
 </div>

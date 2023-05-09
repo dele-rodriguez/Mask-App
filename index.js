@@ -190,7 +190,7 @@ app.route("/users/:username")
                 "userhome" , 
                 {
                     username: req.params.username,
-
+                    messages: req.flash() ,
                 }
             );
         } else {
@@ -211,7 +211,6 @@ app.route("/users/:username/sendmask")
     .post((req ,res) => {
         const maskMessage = req.body.maskMessage;
         const username = req.params.username;
-        console.log(username);
 
         const message1 = new Mask ({
             recipientUsername: username,
@@ -243,7 +242,6 @@ app.route("/users/:username/sendmask")
                         res.redirect("/users/" + req.params.username + "/sendmask");
                     }
                 } else if (foundMask) {
-                    console.log("foundMask: " + foundMask.recipientUsername + " = " + req.params.username);
                     if(foundMask.recipientUsername === req.params.username) {
                         if (req.body.maskMessage.length > 0) {
                             foundMask.maskMessages.push({maskMessage: req.body.maskMessage});
@@ -287,6 +285,9 @@ app.route("/users/:username/:usersmessages")
                     });
                 })
                 .catch((err) => {
+                    req.flash("error" , "Oops! 😅 No one has sent you a message in last 3 Days! Share your profile link and check back later again!");
+                    res.redirect("/users/" + req.params.username);
+                    console.log("there is no message  because there is no Id saved in the SavedId collection");
                     console.log(err);
             });
     } else {

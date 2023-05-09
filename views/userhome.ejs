@@ -10,3 +10,13 @@
 <div>
     <a href="/users/ <%=username.trim() %> /<%=username.trim() %>messages">View your annonymous messages!</a>
 </div>
+
+<% if (messages.error) { %>
+    <div>
+        <p> <%= messages.error %> </p>
+    </div>
+<% } else { %>
+    <div>
+        <p> <%= messages.success %> </p>
+    </div>
+<% } %>
