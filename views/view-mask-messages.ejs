@@ -1,0 +1,10 @@
+<p> <%= username %>  you can view your sent messages here</p>
+
+<div>
+    <% userMessages.map((message , index) => { %>
+        <div>
+            <p><%= message.maskMessage %></p>
+            <p><%= message.sentAt %> </p>
+        </div>
+    <% }) %>
+</div>

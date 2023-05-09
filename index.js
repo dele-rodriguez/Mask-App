@@ -78,12 +78,24 @@ const maskMessageSchema = new mongoose.Schema({
     }],
 });
 
+const storedIdSchema = new mongoose.Schema({
+    username: {
+        type: String , 
+        unique: [true , "Username already exists!"]
+    } , 
+    savedId: {
+        type: String ,
+        unique: [true , "Id must be unique"]
+    }
+});
+
 maskUserSchema.plugin(passportLocalMongoose);
 maskUserSchema.plugin(findOrCreate);
 
 // collection creation
 const User = mongoose.model('MaskUser' , maskUserSchema);
 const Mask = mongoose.model("MaskMessage" , maskMessageSchema);
+const SavedId = mongoose.model("SavedId" , storedIdSchema);
 
 
 passport.use(User.createStrategy());
@@ -164,7 +176,6 @@ app.route("/login")
                     if (err) {
                       return next(err);
                     }
-                    console.log(user.username);
                     // handle successful login
                     return res.redirect('/users/' + user.username);
                   });
@@ -175,8 +186,7 @@ app.route("/login")
 app.route("/users/:username")
     .get((req , res) => {
         if (req.isAuthenticated()) {
-            console.log("user is authenticated");
-            res.render(
+            res.render( 
                 "userhome" , 
                 {
                     username: req.params.username,
@@ -192,7 +202,7 @@ app.route("/users/:username")
 app.route("/users/:username/sendmask")
     .get((req , res) => {
         res.render(
-            "mask-messages" , 
+            "send-mask-messages" , 
             {   username: req.params.username,
                 messages: req.flash() 
             }
@@ -214,9 +224,20 @@ app.route("/users/:username/sendmask")
             .then((foundMask) => {
                 if(!foundMask) {
                     if (req.body.maskMessage.length > 0) {
-                        message1.save();
-                        req.flash("success" , "You are the first to send this user a message!");
-                        res.redirect("/users/" + req.params.username + "/sendmask");
+                        message1.save()
+                            .then((savedMessage) => {
+                                const usersInfo = new SavedId ({
+                                    username: req.params.username,
+                                    savedId: savedMessage._id
+                                })
+                                usersInfo.save();
+
+                                req.flash("success" , "You are the first person to message this user");
+                                res.redirect("/users/" + req.params.username + "/sendmask");
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                        });
                     } else {
                         req.flash("error" , "you can't send an empty message!");
                         res.redirect("/users/" + req.params.username + "/sendmask");
@@ -244,6 +265,33 @@ app.route("/users/:username/sendmask")
                 req.flash("error" , "There was an error sending your message!");
                 res.redirect("/users/" + req.params.username + "/sendmask");
         });  
+});
+
+app.route("/users/:username/:usersmessages")
+.get((req , res) => {
+    if (req.isAuthenticated()) {
+            SavedId.findOne({username: req.params.username})
+                .then((foundInfo) => {
+                    Mask.findById(foundInfo.savedId)
+                        .then((foundMask) => {
+                            res.render(
+                                "view-mask-messages" ,
+                                {
+                                    userMessages: foundMask.maskMessages,
+                                    username: req.params.username
+                                }
+                            );
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                    });
+                })
+                .catch((err) => {
+                    console.log(err);
+            });
+    } else {
+        res.redirect("/");
+    }
 });
 
 app.route("/logout")
