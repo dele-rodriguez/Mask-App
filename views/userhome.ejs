@@ -1,0 +1,22 @@
+<p>Welcome <%= username %> to your home page.</p>
+<div>
+    <a href="/logout">Logout</a>
+</div>
+
+<div>
+    <a href="/users/ <%=username.trim() %> /sendmask">Send <%= username %> an anonymous message ></a>
+</div>
+
+<div>
+    <a href="/users/ <%=username.trim() %> /<%=username.trim() %>messages">View your annonymous messages!</a>
+</div>
+
+<% if (messages.error) { %>
+    <div>
+        <p> <%= messages.error %> </p>
+    </div>
+<% } else { %>
+    <div>
+        <p> <%= messages.success %> </p>
+    </div>
+<% } %>
