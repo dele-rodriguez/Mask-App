@@ -150,7 +150,89 @@ a {
     display: none;
 
 }
+/* end homepage styles */
 
+/* aboutpage styles */
+.about-container {
+    position: relative;
+    width: 85%;
+    height: 95%;
+    background: #DBC8CA;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
+    z-index: -3;
+    padding-bottom: 40px;
+}
+.about-container > p{
+    height: 15%;
+    text-align: center;
+    width: 100%;
+    font-family: 'Comic Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 70px;
+    line-height: 84px;
+    color: #443D45;
+}
+.cards {
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    margin: 0 5%;
+}
+.card-holder {
+    width: 75%;
+    height: 110px;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    z-index: -2;
+}
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    gap: 3px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 20px;
+    width: 80%;
+    height: 120px;
+}
+.move-right {
+    position: relative;
+    left: 20%;
+}
+.card-content > i {
+    font-size: 20px;
+    color: #212121;
+}
+.card-content > h3 {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 35px;
+}
+.card-content > p {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 17px;
+    color: #000000;
+}
+
+
+
+
+
+
+/* end aboutpage styles */
 /* end class styles  */
 
 
@@ -165,8 +247,36 @@ a {
 }
 #home {
     width: 100%;
-    height: 400px;
+    height: 500px;
     margin: 3% 0;
+}
+#about {
+    width: 100%;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#card-holder-1 {
+    top: 7%;
+    left: -2%;
+}
+#color-1 {
+    color: #63C86D;
+}
+#card-holder-2 {
+    top: 25%;
+    left: -2%;
+}
+#color-2 {
+    color: #6E7AED;
+}
+#card-holder-3 {
+    top: 77.5%;
+    left: -2%;
+}
+#color-3 {
+    color: #E1BE41;
 }
 
 
@@ -239,36 +349,81 @@ a {
 
     /* homepage styles responsive  */
     .home {
-        height: 850px;
+        height: 100%;
         flex-direction: column;
         align-items: center;
     }
     .home-content {
-        width: 90%;
-        height: 55%;
+        position: relative;
+        width: 95%;
+        height: 70%;
         text-align: center;
+        top: 50px;
     }
     .home-content > h2 {
         font-size: 40px;
         line-height: 40px;
+        height: 35%;
     }
     .home-content > p  {
         position: relative;
         bottom: 20px;
+        margin-bottom: 60px;
     }
     .home-content > button  {
         height: 35px;
+    }
+    .home-img > img {
+        height: 350px;
     }
     .half-mask {
         display: none;
     }
     .full-mask {
         display: block;
-        width: 300px;
-        height: 400px;
+        width: 220px;
     }
-    
+    /* end responsive homepage */
 
+    /* aboutpage responsive styles  */
+    .about-container {
+        width: 85%;
+        height: 95%;
+    }
+    .about-container > p{
+        height: 10%;
+        font-size: 30px;
+    }
+    .cards {
+        height: 90%;
+        margin: 0 3%;
+    }
+    .card-holder {
+        width: 95%;
+        height: 140px;
+    }
+    .card-content {
+        height: 150px;
+        width: 95%;
+    }
+    .move-right {
+        left: 5%;
+    }
+    .card-content > i {
+        font-size: 15px;
+    }
+    .card-content > h3 {
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 28px;
+    }
+    .card-content > p {
+        font-size: 13px;
+        line-height: 17px;
+    }    
+
+    /* end aboutpage responsive styles  */
+    
 
     /* id's  */
     #vector-1 {
@@ -278,5 +433,23 @@ a {
     #vector-2 {
         width: 80%;
     }
-    
+    #home {
+        height: 850px;
+    }
+    #about {
+        width: 100%;
+        height: 700px;
+    }
+    #card-holder-1 {
+        top: 5%;
+        left: -3%;
+    }
+    #card-holder-2 {
+        top: 20%;
+        left: -4%;
+    }
+    #card-holder-3 {
+        top: 77.5%;
+        left: -3%;
+    }
 }
