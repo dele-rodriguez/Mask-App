@@ -110,7 +110,7 @@ a {
     height: 550px;
 }
 .home-content {
-    width: 50%;
+    width: 70%;
     position: relative;
     margin-left: 3%;
     height: 80%;
@@ -179,6 +179,11 @@ a {
     #vector-2 {
         width: 55%;
     }
+
+
+    .home-content > h2{
+        font-size: 50px;
+    }
 }
 
 
@@ -240,8 +245,16 @@ a {
     }
     .home-content {
         width: 90%;
-        height: 50%;
+        height: 55%;
         text-align: center;
+    }
+    .home-content > h2 {
+        font-size: 40px;
+        line-height: 40px;
+    }
+    .home-content > p  {
+        position: relative;
+        bottom: 20px;
     }
     .home-content > button  {
         height: 35px;
