@@ -1,18 +1,32 @@
-<form action="/register" method="post">
-    <div>
-        <label for="text">Username</label>
-        <input type="text" name="username">
-    </div>
-    <% if (messages.error) { %>
-        <div>
-            <p> <%= messages.error %> </p>
-        </div>
-    <% } %>
-    <div>
-        <label for="password">Password</label>
-        <input type="password" name="password">
-    </div>
-    <button type="submit">Register</button>
-</form>
+<%- include('partials/header') %>
 
-<a href="/login">Already have an account? Login!</a>
+<%- include('partials/navbar') %>
+
+<section id="sign-up">
+    <div class="sign-up-container">
+        <p>Sign Up</p>
+        <form action="/register" method="post">
+            <% if (messages.error) { %>
+                <div class="flash-div">
+                    <p> <%= messages.error %> </p>
+                </div>
+            <% } %>
+            <div class="user-div">
+                <label for="text">Username:</label>
+                <input type="text" name="username">
+            </div>
+            <div class="password-div">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="passwordInput"><i class="fa-solid fa-eye-slash" id="togglePassword" ></i></input>
+            </div>
+            <div class="submit-div">
+                <a href="/login">Already have an account? <span class="color-1">Login!</span></a>
+                <button class="submit-btn" type="submit">Sign Up</button>
+            </div>
+        </form>
+        <span>Join other users who use MASK as a medium to express themselves today!</span>
+    </div>
+</section>
+
+
+<%- include('partials/footer') %>

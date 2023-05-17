@@ -1,6 +1,7 @@
 $(document).ready(function() {
     activeLinkControl();
     toggler();
+    passwordtoText();
 });
 
 function activeLinkControl() {
@@ -19,5 +20,19 @@ function activeLinkControl() {
 function toggler() {
     $(".fa-bars").on("click" , function() {
         $(".nav").toggleClass("mobile-menu");
+    });
+}
+function passwordtoText() {
+    const passwordInput = $('#passwordInput');
+    const togglePassword = $('#togglePassword');
+  
+    togglePassword.on('click', function() {
+      if (passwordInput.attr('type') === 'password') {
+        passwordInput.attr('type', 'text');
+        togglePassword.addClass('show-password');
+      } else {
+        passwordInput.attr('type', 'password');
+        togglePassword.removeClass('show-password');
+      }
     });
 }
