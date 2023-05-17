@@ -386,7 +386,7 @@ a {
     top: 25%;
     left: -2%;
 }
-#color-2 {
+.color-2 {
     color: #6E7AED;
 }
 #card-holder-3 {
@@ -403,6 +403,9 @@ a {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+#color-1-bg {
+    background-color: #63C86D;
 }
 
 

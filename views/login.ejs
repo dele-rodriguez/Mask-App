@@ -1,18 +1,32 @@
-<% if (messages.error) { %>
-    <div>
-        <p> <%= messages.error %> </p>
-    </div>
-<% } %>
+<%- include('partials/header') %>
 
-<form action="/login" method="post">
-    <div>
-        <label for="username">Username</label>
-        <input type="text" name="username">
+<%- include('partials/navbar') %>
+
+<section id="sign-up">
+    <div class="sign-up-container">
+        <p>Login</p>
+        <form action="/login" method="post">
+            <% if (messages.error) { %>
+                <div class="flash-div">
+                    <p> <%= messages.error %> </p>
+                </div>
+            <% } %>
+            <div class="user-div">
+                <label for="text">Username:</label>
+                <input type="text" name="username">
+            </div>
+            <div class="password-div">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="passwordInput"><i class="fa-solid fa-eye-slash" id="togglePassword" ></i></input>
+            </div>
+            <div class="submit-div">
+                <a href="/register">Don't have an account? <span class="color-2">Sign Up!</span></a>
+                <button class="submit-btn" id="color-1-bg" type="submit">Login</button>
+            </div>
+        </form>
+        <span>Ensure no one sees your password. That is the surest way to keep your messages private!</span>
     </div>
-    <div>
-        <label for="password">Password</label>
-        <input type="password" name="password">
-    </div>
-    <button type="submit">Login</button>
-</form>
-<a href="/register">Don't have an account? Register!</a>
+</section>
+
+
+<%- include('partials/footer') %>
