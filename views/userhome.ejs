@@ -1,22 +1,58 @@
-<p>Welcome <%= username %> to your home page.</p>
-<div>
-    <a href="/logout">Logout</a>
-</div>
+<%- include('partials/header') %>
 
-<div>
-    <a href="/users/ <%=username.trim() %> /sendmask">Send <%= username %> an anonymous message ></a>
-</div>
-
-<div>
-    <a href="/users/ <%=username.trim() %> /<%=username.trim() %>messages">View your annonymous messages!</a>
-</div>
-
-<% if (messages.error) { %>
-    <div>
-        <p> <%= messages.error %> </p>
+<section id="users-homepage">
+    <div class="glass-background">
+        <div class="sm-height">
+            <p class="paragraph"><%= username%>'s Profile</p>
+        </div>
+        <div class="sm-height">
+            <div>
+                <a class="special-link" href="http://localhost:3030/users/ <%=username.trim() %> /sendmask">
+                    https://<%=username%>/sendmask 
+                </a>
+                <span>
+                    <i class="fa-regular fa-copy"></i>
+                </span> 
+            </div>
+        </div>
+        <div class="lg-height">
+            <p class="share-guide">Share your profile link ❤️ to get responses from your friend. Go to "View Messages" to check out the responses. 👌</p>
+        </div>
+        <div class="md-height">
+            <button class="share-btn">
+                <span>
+                    <a class="share-profile" href="http://localhost:3030/users/ <%=username.trim() %> /sendmask">Share On WhatsApp
+                </span>
+                <i class="fa-solid fa-share-from-square"></i>   
+            </button>
+        </div>
+        <div class="md-height">
+            <a class="view-messages" href="/users/ <%=username.trim() %> /<%=username.trim() %>messages">
+                View Messages
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+        </div>
+        <div class="lg-height">
+            <% if (messages.error) { %>
+                <div>
+                  <p class="<%= messages.error.length > 0 ? 'error' : '' %> message">
+                    <%= messages.error %>
+                  </p>
+                </div>
+              <% } else { %>
+                <div>
+                  <p>
+                    <%= messages.success %>
+                  </p>
+                </div>
+              <% } %>
+              
+        </div>
+        <div class="sm-height">
+            <a class="logout" href="/logout">Logout</a>
+        </div>
     </div>
-<% } else { %>
-    <div>
-        <p> <%= messages.success %> </p>
-    </div>
-<% } %>
+</section>
+
+
+<%- include('partials/footer') %>

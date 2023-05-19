@@ -3,12 +3,14 @@
 <%- include('partials/navbar') %>
 
 <section id="sign-up">
-    <div class="sign-up-container">
+    <div class="sign-up-container glass-background">
         <p>Login</p>
         <form action="/login" method="post">
             <% if (messages.error) { %>
                 <div class="flash-div">
-                    <p> <%= messages.error %> </p>
+                    <p class="<%= messages.error.length > 0 ? 'error' : '' %> message">
+                        <%= messages.error %>
+                    </p>
                 </div>
             <% } %>
             <div class="user-div">
