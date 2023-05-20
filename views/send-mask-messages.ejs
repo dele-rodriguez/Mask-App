@@ -1,19 +1,33 @@
-<p> <%=username %> You're in the mask-message route</p>
+<%- include('partials/header') %>
 
-<form action="/users/<%= username %>/sendmask" method="post">
-    <div>
-        <label for="mask-message">Mask Message</label>
-        <input type="text" name="maskMessage">
+<section id="send-message" class="page-container">
+    <div class="send-message-container">
+        <div class="users-intro">
+            <p> Send <%=username %> a message</p>
+        </div>
+        <div>
+            <% if (messages.error) { %>
+                <div>
+                    <p class="<%= messages.error.length > 0 ? 'error' : '' %> message"> <%= messages.error %> </p>
+                </div>
+            <% } else if (messages.success) { %>
+                <div>
+                    <p class="<%= messages.success.length > 0 ? 'success' : '' %> message"> <%= messages.success %> </p>
+                </div>
+            <% } %>
+        </div>
+        <div>
+            <form class="message-form" action="/users/<%= username %>/sendmask" method="post">
+                <div>
+                    <textarea rows="5" cols="40" type="text" name="maskMessage" placeholder="Write your message and hide behind the MASK...."></textarea>
+                </div>
+                <button type="submit">
+                    Hide behind the mask
+                    <img src="/images/mask-icon.png" alt="mask-icon">
+                </button>
+            </form>
+        </div>
     </div>
-    <button type="submit">Hide behind the mask</button>
-</form>
+</section>
 
-<% if (messages.error) { %>
-    <div>
-        <p> <%= messages.error %> </p>
-    </div>
-<% } else { %>
-    <div>
-        <p> <%= messages.success %> </p>
-    </div>
-<% } %>
+<%- include('partials/footer') %>
