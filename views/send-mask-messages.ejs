@@ -8,18 +8,18 @@
         <div>
             <% if (messages.error) { %>
                 <div>
-                    <p class="<%= messages.error.length > 0 ? 'error' : '' %> message"> <%= messages.error %> </p>
+                    <p class="<%= messages.error.length > 0 ? 'error' : '' %> message" id="error"> <%= messages.error %> </p>
                 </div>
             <% } else if (messages.success) { %>
                 <div>
-                    <p class="<%= messages.success.length > 0 ? 'success' : '' %> message"> <%= messages.success %> </p>
+                    <p class="<%= messages.success.length > 0 ? 'success' : '' %> message" id="success"> <%= messages.success %> </p>
                 </div>
             <% } %>
         </div>
         <div>
             <form class="message-form" action="/users/<%= username %>/sendmask" method="post">
                 <div>
-                    <textarea rows="5" cols="40" type="text" name="maskMessage" placeholder="Write your message and hide behind the MASK...."></textarea>
+                    <textarea rows="5" cols="35" type="text" name="maskMessage" placeholder="Write your message and hide behind the MASK...."></textarea>
                 </div>
                 <button type="submit">
                     Hide behind the mask

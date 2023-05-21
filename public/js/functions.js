@@ -51,7 +51,19 @@ function copyToClipboard() {
           .catch(function(error) {
             console.error('Failed to copy link:', error);
         });
-    });   
+    });
+    $('.special-link').on('click', () => {
+        var linkText = $('.special-link').attr('href');
+        
+        navigator.clipboard.writeText(linkText)
+          .then(() => {
+            alert("Copied link to clipboard!");
+            // You can add additional feedback or notification here
+          })
+          .catch(function(error) {
+            console.error('Failed to copy link:', error);
+        });
+    });     
 }
 function shareProfile() {
     $('.share-btn').click(() => {
@@ -68,7 +80,7 @@ function shareProfile() {
     });
 }
 function disableLink() {
-    $('.share-profile').click((event) => {
+    $('.disable-link').click((event) => {
         event.preventDefault(); // Prevent the default behavior of the link
         // Your custom logic here
       });
