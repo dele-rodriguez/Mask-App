@@ -40,7 +40,7 @@ const clusterPassword = process.env.CLUSTER_PASSWORD;
 const atlasUrl = "mongodb+srv://" + clusterUsername + ":" + clusterPassword + "@cluster0.p0vhcs6.mongodb.net/maskUserDB";
 
 // connect to mongoDB atlas
-mongoose.connect(localUrl)
+mongoose.connect(atlasUrl)
     .then (() => {
         console.log("connected");
     })
