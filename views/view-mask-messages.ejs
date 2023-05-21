@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+
+<section id="my-messages" class="page-container">
+    <div class="my-messages-container">
+        <h2>My Messages</h2>
+        <p>👇 Scroll 👇 down to check out the messages that you have received</p>
+        <div class="col-reverse">
+            <% if(userMessages) { %>
+                <% userMessages.map((message , index) => { %>
+                    <div class="<%= message.maskMessage.length > 0 ? 'message-div' : '' %> message">
+                        <p>Message:</p>
+                        <% const dateString = message.sentAt.toString(); %>
+                        <% const newDateString = dateString.substring(0, dateString.indexOf("GMT")); %>
+                        <p><%= message.maskMessage %></p>
+                        <p>~Anonymous [<%= newDateString %>] </p>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <div>
+                    <p class="error">Oops! 😅 No one has sent you a message in last 3 Days! Share your profile link and check back later again!</p>
+                </div>
+            <% } %>
+        </div>
+        <a href="/users/ <%=username.trim() %> /<%=username.trim() %>messages"><i class="fa-solid fa-arrows-rotate"></i></a>
+    </div>
+</section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,988 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Montserrat&family=Open+Sans&family=Roboto&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* element styles */
+body {
+    background: linear-gradient(67.2deg, #000000 4.69%, #1A0014 95.09%);
+    width: 100%;
+    height: 100%;
+}
+a {
+  color: inherit; /* Use the default text color */
+  text-decoration: none; /* Remove underline */
+}
+
+
+/* class styles */
+
+/* navbar.ejs styles  */
+.navbar {
+    margin: 1% 2%;
+}
+.icon {
+    width: 15%;
+}
+.icon img{
+    width: 100px;
+    height: 40px;
+}
+.nav {
+    width: 85%;
+}
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 110px;
+    height: 35px;
+    border: 1px solid #DBC8CA;
+    background-color: #DBC8CA;
+    border-radius: 10px;
+    margin-left: 20px;
+}
+.nav-item:hover {
+    background-color: #1A0014;
+}
+.nav-link {
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 22px;
+    color: #1A0014;
+}
+.nav-link:hover {
+    color: #DBC8CA;
+}
+.active {
+    color: #DBC8CA;
+}
+.li-active{
+    background-color: #1A0014;
+}
+.my-btn {
+    --bs-btn-border-width: 0;
+    --bs-btn-border-color: transparent;
+    --bs-btn-border-radius: 0;
+    --bs-btn-hover-border-color: transparent;
+}
+.dropdown-menu {
+    background-color: #DBC8CA;
+    --bs-dropdown-link-hover-color: #1e2125;
+    --bs-dropdown-link-hover-bg: #1A0014;
+}
+.dropdown-item:hover {
+    background-color: linear-gradient(67.2deg, #000000 4.69%, #1A0014 95.09%);;
+}
+.checkbtn {
+    position: absolute;
+    font-size: 30px;
+    color:  #DBC8CA;
+    line-height: 80px;
+    right: 0;
+    margin-right: 30px;
+    cursor: pointer;
+    display: none;
+}
+#check {
+    display: none;
+}
+.vector {
+    position: absolute;
+    z-index: -5;
+}
+/* end navbar.ejs atyles  */
+
+
+/* homepage styles  */
+.home {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    height: 550px;
+}
+.home-content {
+    width: 70%;
+    position: relative;
+    margin-left: 3%;
+    height: 80%;
+}
+.home-content > h2 {
+    font-family: 'Comic Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 74px;
+    color: #FFFFFF;
+    height: 35%;
+}
+.home-content > p {
+    font-family: 'Comic Neue';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 31px;
+    color: #FFFFFF;
+    height: 30%;
+}
+.home-content > button  {
+    width: 200px;
+    height: 40px;
+    background: #DBC8CA;
+    border-radius: 10px;
+}
+.home-content > button:hover {
+    color: #DBC8CA;
+    border: 1px solid #DBC8CA;
+}
+.home-img > img {
+    height: 500px;
+}
+.full-mask {
+    display: none;
+
+}
+/* end homepage styles */
+
+/* aboutpage styles */
+.about-container {
+    position: relative;
+    width: 85%;
+    height: 95%;
+    background: #DBC8CA;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
+    z-index: -3;
+    padding-bottom: 40px;
+}
+.about-container > p{
+    height: 15%;
+    text-align: center;
+    width: 100%;
+    font-family: 'Comic Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 70px;
+    line-height: 84px;
+    color: #443D45;
+}
+.cards {
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    margin: 0 5%;
+}
+.card-holder {
+    width: 75%;
+    height: 110px;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    z-index: -2;
+}
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    gap: 3px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 20px;
+    width: 80%;
+    height: 120px;
+}
+.move-right {
+    position: relative;
+    left: 20%;
+    width: 95%;
+}
+.card-content > i {
+    font-size: 20px;
+    color: #212121;
+}
+.card-content > h3 {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 35px;
+}
+.card-content > p {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 17px;
+    color: #000000;
+}
+/* end aboutpage styles */
+
+/* sign up page styles */
+.glass-background {
+    position: relative;
+    background-image: url("../images/background.png");
+    background-size: cover;
+    box-shadow: 0px 4px 24px -1px rgba(0, 0, 0, 0.24);
+    border-radius: 20px;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+}
+.sign-up-container > p {
+    font-family: 'Comic Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 58px;
+    color: #FFFFFF;
+    height: 10%;
+}
+.sign-up-container > form {
+    width: 100%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.sign-up-container > form > div {
+    display: flex;
+}
+.flash-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flash-div > p {
+    font-family: "Montserrat";
+    color: #DBC8CA;
+    font-size: 20px;
+}
+.user-div {
+    justify-content: space-evenly;
+}
+.sign-up-container  label {
+    font-family: 'Comic Neue';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 31px;
+    color: #FFFFFF;
+}
+.sign-up-container input {
+    width: 220px;
+    height: 35px;
+    background: rgba(219, 200, 202, 0.75);
+    border: 1px solid #1A0014;
+    border-radius: 10px;
+    padding: 0 15px;
+}
+.password-div {
+    position: relative;
+    justify-content: space-evenly;
+}
+.fa-eye-slash {
+    position: absolute;
+    color: #1A0014;
+    right: 15%;
+    top: 25%;
+}
+.show-password {
+    color: #FFFFFF;
+    font-size: 20px;
+}
+.submit-div {
+    justify-content: space-between;
+    align-items: center;
+}
+.submit-div > a {
+    margin-left: 5%;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    color: #FFFFFF;
+}
+.submit-btn {
+    position: relative;
+    height: 40px;
+    width: 100px;
+    background: #6E7AED;
+    border: 1px solid #1A0014;
+    border-radius: 10px;
+    font-family: 'Comic Neue';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+    margin-right: 12%;
+}
+.submit-btn:hover {
+    opacity: .8;
+}
+.sign-up-container > span {
+    height: 10%;
+    text-align: center;
+    width: 90%;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #FFFFFF;
+}
+/* end style up page styles */
+
+/* users homepage styles  */
+#users-homepage > div > div {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.sm-height {
+    height: 10%;
+}
+.md-height {
+    height: 15%;
+}
+.lg-height {
+    height: 22%;
+}
+.paragraph {
+    font-family: "Montserrat";
+    font-weight: 700;
+    font-size: 30px;
+    color: #DBC8CA;
+}
+.special-link {
+    color:  #DBC8CA;
+    font-size: 17px;
+}
+.special-link:hover {
+    color: #FFFFFF;
+}
+.fa-copy {
+    color: #63C86D;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 17px;
+}
+.fa-copy:hover {
+    opacity: .8;
+    font-size: 20px;
+}
+.share-guide {
+    font-size: 17px;
+    color: #FFFFFF;
+}
+.share-btn {
+    width: 60%;
+    height: 50px;
+    background-color: #63C86D;
+    border-radius: 30px;
+    border: 1px solid black;
+}
+.share-btn:hover {
+    opacity: .8;
+}
+.share-btn > span {
+    color: #FFFFFF;
+    font-size: 17px;
+}
+.share-btn > span > a:hover {
+    color: #FFFFFF;
+}
+.share-btn > i {
+    margin-left: 10px;
+}
+.view-messages {
+    position: relative;
+    width: 60%;
+    height: 50px;
+    background-color: #6E7AED;
+    border-radius: 30px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    color: #FFFFFF;
+}
+.view-messages:hover {
+    opacity: .8;
+    color: #FFFFFF;
+}
+.view-messages > i {
+    font-size: 17px;
+    color: #000000;
+    margin-left: 10px;
+}
+.error {
+    color: rgba(201, 77, 77, 0.938);
+}
+.message {
+    width: 100%;
+    height: 95%;
+    padding: 0 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.success {
+    color: #63C86D;
+}
+.logout {
+    color: white;
+    width: 100px;
+    font-size: 17px;
+    height: 30px;
+    background-color: rgba(201, 77, 77, 0.938);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logout:hover {
+    color: #FFFFFF;
+    opacity: .8;
+}
+/* end users homepage styles  */
+
+
+/* send mask message homepage  */
+.send-message-container {
+    position: relative;
+    background-image: url("../images/background.png");
+    background-size: cover;
+    box-shadow: 0px 4px 24px -1px rgba(0, 0, 0, 0.24);
+    border-radius: 20px;
+    width: 65%;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+}
+.users-intro {
+    font-family: "Comic Neue";
+    color: #DBC8CA;
+    font-size: 30px;
+}
+.message-form {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+.message-form textarea {
+    background-color: #DBC8CA;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid black;
+    color: #1e2125;
+    font-family: "Montserrat";
+    font-size: 20px;
+}
+.message-form textarea:focus {
+    opacity: .8;
+    border: 1px solid #1e2125;
+    font-family: "Montserrat";
+}
+.message-form > button {
+    background-color: #d1a6aabd;
+    padding: 5px 20px;
+    border-radius: 30px;
+    font-size: 15px;
+    justify-self: center;
+    align-self: flex-end;
+    color: #212121;
+    font-family: "Montserrat";
+    font-weight: 900;
+    margin: 20px 0;
+}
+.message-form > button:hover {
+    opacity: .8;
+}
+.message-form > button > img {
+    width: 30px;
+    height: 40px;
+    margin-left: 10px;
+}
+/* end send mask message homepage */
+
+/* view my messages page style  */
+.my-messages-container {
+    width: 500px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    border: 1px solid #DBC8CA;
+    position: relative;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Comic Neue';
+}
+.my-messages-container > h2 {
+    color:white;
+    font-size: 30px;
+    font-weight: 600;
+}
+.my-messages-container > p {
+    color: white;
+}
+.my-messages-container > div {
+    width: 90%;
+}
+.message-div {
+    font-family: 'Montserrat';
+    color: white;
+    font-size: 15px;
+    border: 1px solid #6E7AED;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 10px 15px 0;
+    margin: 0 0 20px;
+}
+.fa-arrows-rotate {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 40px;
+    color: #DBC8CA;
+}
+.col-reverse {
+    display: flex;
+    flex-direction: column-reverse;
+}
+/* end view my messages page styles  */
+/* end class styles  */
+
+
+/* id styles */
+#vector-1 {
+    opacity: 0.5;
+    top: 25%;
+}
+#vector-2 {
+    right: 0;
+    top: 0;
+}
+#home {
+    width: 100%;
+    height: 500px;
+    margin: 3% 0;
+}
+#about {
+    width: 100%;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#card-holder-1 {
+    top: 7%;
+    left: -2%;
+}
+.color-1 {
+    color: #63C86D;
+}
+#card-holder-2 {
+    top: 25%;
+    left: -2%;
+}
+.color-2 {
+    color: #6E7AED;
+}
+#card-holder-3 {
+    top: 77.5%;
+    left: -2%;
+}
+#color-3 {
+    color: #E1BE41;
+}
+#sign-up {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#color-1-bg {
+    background-color: #63C86D;
+}
+.page-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10%;
+}
+
+
+
+@media (max-width: 1000px) {
+    #vector-1 {
+        top: 35%;
+        width: 70%;
+        height: 100%;
+    }
+    #vector-2 {
+        width: 55%;
+    }
+
+
+    .home-content > h2{
+        font-size: 50px;
+    }
+}
+
+
+/* responsive design  */
+/* phones and tabs  */
+@media (max-width: 700px) {
+    /* navbar responsive */
+    .icon img{
+        width: 80px;
+        height: 30px;
+    }
+    .nav {
+        position: absolute;
+        width: 80%;
+        height: 70vh;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+        top: 42px;
+        right: 0;
+        z-index: 1;
+        clip-path: circle(0 at 100% 0%);
+        transition: all .8s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .justify-content-end {
+        justify-content: start!important;
+    }
+    .nav-item {
+        width: 120px;
+        height: 30px;
+        border: 0px solid #DBC8CA;
+        margin: 20px 20px;
+    }
+    .mobile-menu {
+        clip-path: circle(120% at 100% 0%);
+    }
+    .checkbtn {
+        display: block;
+        position: absolute;
+        line-height: 48px;
+        top: 0;
+    }
+    .nav-item:hover {
+        background-color: #1A0014;
+    }
+    .nav-link {
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 18px;
+    }
+
+
+    /* homepage styles responsive  */
+    .home {
+        height: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+    .home-content {
+        position: relative;
+        width: 95%;
+        height: 70%;
+        text-align: center;
+        top: 50px;
+    }
+    .home-content > h2 {
+        font-size: 40px;
+        line-height: 40px;
+        height: 35%;
+    }
+    .home-content > p  {
+        position: relative;
+        bottom: 20px;
+        margin-bottom: 60px;
+    }
+    .home-content > button  {
+        height: 35px;
+    }
+    .home-img > img {
+        height: 350px;
+    }
+    .half-mask {
+        display: none;
+    }
+    .full-mask {
+        display: block;
+        width: 220px;
+    }
+    /* end responsive homepage */
+
+    /* aboutpage responsive styles  */
+    .about-container {
+        width: 85%;
+        height: 95%;
+    }
+    .about-container > p{
+        height: 10%;
+        font-size: 30px;
+    }
+    .cards {
+        height: 90%;
+        margin: 0 3%;
+    }
+    .card-holder {
+        width: 95%;
+        height: 140px;
+    }
+    .card-content {
+        height: 150px;
+        width: 95%;
+    }
+    .move-right {
+        left: 5%;
+    }
+    .card-content > i {
+        font-size: 15px;
+    }
+    .card-content > h3 {
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 28px;
+    }
+    .card-content > p {
+        font-size: 13px;
+        line-height: 17px;
+    }    
+    /* end aboutpage responsive styles  */
+
+    /* sign up page responsive Styles  */
+    .glass-background{
+        width: 90%;
+        height: 70%;
+        padding: 30px 15px;
+    }
+    .sign-up-container > p {
+        font-size: 25px;
+        line-height: 27px;
+    }
+    .sign-up-container > form {
+        width: 100%;
+        height: 85%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    .flash-div > p {
+        font-size: 15px;
+    }
+    .sign-up-container  label {
+        font-size: 15px;
+        line-height: 25px;
+    }
+    .sign-up-container input {
+        width: 60%;
+        height: 25px;
+        padding: 0 15px;
+    }
+    .fa-eye-slash {
+        top: 16%;
+        right: 10%;
+    }
+    .show-password {
+        font-size: 15px;
+    }
+    .submit-div > a {
+        margin-left: 0;
+        font-size: 12px;
+        line-height: 15px;
+    }
+    .submit-btn {
+        height: 25px;
+        font-size: 12px;
+        line-height: 15px;
+        margin-right: 10%;
+    }
+    .sign-up-container > span {
+        width: 95%;
+        font-size: 12px;
+        line-height: 13px;
+    }
+    /* end sign up page rsponsive styles  */
+
+    /* users home page responsive styles  */
+    #users-homepage > div > div {
+        width: 100%;
+    }
+    .paragraph {
+        font-size: 22px;
+    }
+    .special-link {
+        font-size: 15px;
+    }
+    .special-link:hover {
+        color: #FFFFFF;
+    }
+    .fa-copy {
+        font-size: 15px;
+    }
+    .fa-copy:hover {
+        font-size: 17px;
+    }
+    .share-guide {
+        font-size: 15px;
+        text-align: center;
+    }
+    .share-btn {
+        width: 90%;
+        height: 30px;
+
+    }
+    .share-btn > span {
+        font-size: 15px;
+    }
+    .view-messages {
+        position: relative;
+        width: 90%;
+        height: 30px;
+    }
+    .view-messages > i {
+        font-size: 15px;
+    }
+    .logout {
+        font-size: 15px;
+    }
+    /* end user's homepage responsive styles  */
+
+
+    /* send messages page styles  */
+    .send-message-container {
+        width: 85%;
+        height: 53vh;
+    }
+    .users-intro {
+        font-size: 15px;
+        letter-spacing: 1px;
+    }
+    .message-form {
+        margin: 15px 0;
+    }
+    .message-form textarea {
+        width: 100%;
+        font-size: 15px;
+    }
+    .message-form > button {
+        padding: 5px 5px;
+        border-radius: 30px;
+        font-size: 12px;
+        margin: 20px 0;
+        width: 100%;
+    }
+    .message-form > button > img {
+        width: 25px;
+        height: 35px;
+        margin-left: 10px;
+    }
+    /* end send messages page styles  */
+
+
+    /* view message responsive styles  */
+    .my-messages-container {
+        width: 90%;
+        padding: 15px;
+    }
+    .my-messages-container > h2 {
+        font-size: 25px;
+    }
+    .my-messages-container > p {
+        color: #DBC8CA;
+        text-align: center;
+    }
+    .my-messages-container > div {
+        width: 100%;
+    }
+    .message-div {
+        font-size: 12px;
+        padding: 10px 10px 0;
+        margin: 0 0 15px;
+    }
+    .fa-arrows-rotate {
+        font-size: 20px;
+    }
+
+    /* end view message responsive styles  */
+
+
+    /* id's  */
+    #vector-1 {
+        top: 50%;
+        width: 90%;
+    }
+    #vector-2 {
+        width: 80%;
+    }
+    #home {
+        height: 850px;
+    }
+    #about {
+        width: 100%;
+        height: 700px;
+    }
+    #card-holder-1 {
+        top: 5%;
+        left: -3%;
+    }
+    #card-holder-2 {
+        top: 20%;
+        left: -4%;
+    }
+    #card-holder-3 {
+        top: 77.5%;
+        left: -3%;
+    }
+    #sign-up {
+        height: 70vh;
+    }
+    .page-container {
+        margin-top: 30%;
+    }
+    #users-homepage > div > div {
+        margin-bottom: 15px;
+    }
+}
