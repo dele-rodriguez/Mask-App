@@ -10,6 +10,8 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr(process.env.CRYPT_SECRET);
 
 const app = express();
 
@@ -144,9 +146,11 @@ app.route("/register")
                         res.redirect("/register");
                     }
                 } else {
+                    const encryptedUs = cryptr.encrypt(req.body.username);
+                    console.log(encryptedUs);
                     console.log("registration successful");
                     passport.authenticate("local")(req , res , () => {
-                        res.redirect("/users/" + req.body.username);
+                        res.redirect("/users/" + encryptedUs);
                     });
                 }
             });
@@ -182,7 +186,7 @@ app.route("/login")
                       return next(err);
                     }
                     // handle successful login
-                    return res.redirect('/users/' + user.username);
+                    return res.redirect('/users/' + cryptr.encrypt(user.username));
                   });
             }
         })(req, res, next);
@@ -195,6 +199,7 @@ app.route("/users/:username")
                 "userhome" , 
                 {
                     username: req.params.username,
+                    decryptUsername: cryptr.decrypt(req.params.username),
                     messages: req.flash() ,
                 }
             );
@@ -209,13 +214,14 @@ app.route("/users/:username/sendmask")
         res.render(
             "send-mask-messages" , 
             {   username: req.params.username,
+                decryptUsername: cryptr.decrypt(req.params.username),
                 messages: req.flash() 
             }
         );
     })
     .post((req ,res) => {
         const maskMessage = req.body.maskMessage;
-        const username = req.params.username;
+        const username = cryptr.decrypt(req.params.username);
 
         const message1 = new Mask ({
             recipientUsername: username,
@@ -224,14 +230,14 @@ app.route("/users/:username/sendmask")
             }]
         });
 
-        Mask.findOne({recipientUsername: req.params.username})
+        Mask.findOne({recipientUsername: cryptr.decrypt(req.params.username)})
             .then((foundMask) => {
                 if(!foundMask) {
                     if (req.body.maskMessage.length > 0) {
                         message1.save()
                             .then((savedMessage) => {
                                 const usersInfo = new SavedId ({
-                                    username: req.params.username,
+                                    username: cryptr.decrypt(req.params.username),
                                     savedId: savedMessage._id
                                 })
                                 usersInfo.save();
@@ -247,12 +253,13 @@ app.route("/users/:username/sendmask")
                         res.redirect("/users/" + req.params.username + "/sendmask");
                     }
                 } else if (foundMask) {
-                    if(foundMask.recipientUsername === req.params.username) {
+                    if(foundMask.recipientUsername === username) {
                         if (req.body.maskMessage.length > 0) {
                             foundMask.maskMessages.push({maskMessage: req.body.maskMessage});
-                            foundMask.save();
-                            req.flash("success" , "Your new message has been sucessfully sent!");
-                            res.redirect("/users/" + req.params.username + "/sendmask");
+                            foundMask.save().then(() => {
+                                req.flash("success" , "Your new message has been sucessfully sent!");
+                                res.redirect("/users/" + req.params.username + "/sendmask");
+                            });
                         } else{
                             req.flash("error" , "you can't send an empty message!");
                             res.redirect("/users/" + req.params.username + "/sendmask");
@@ -273,7 +280,7 @@ app.route("/users/:username/sendmask")
 app.route("/users/:username/:usersmessages")
 .get((req , res) => {
     if (req.isAuthenticated()) {
-            SavedId.findOne({username: req.params.username})
+            SavedId.findOne({username: cryptr.decrypt(req.params.username)})
                 .then((foundInfo) => {
                     Mask.findById(foundInfo.savedId)
                         .then((foundMask) => {
