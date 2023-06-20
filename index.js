@@ -26,7 +26,7 @@ app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: 60 * 60 * 1000 }
+  cookie: { maxAge: 5 * 60 * 60 * 1000 }
 }));
 app.use(flash());
 app.use(passport.initialize());
@@ -125,27 +125,32 @@ app.route("/register")
         res.render("register" , { messages: req.flash() });
     })
     .post((req , res) => {
-    User.register({username: req.body.username}, req.body.password , (err , user) => {
-        if (err) {
-            console.log("registration err");
-            console.log("error message: " + err.message);
-            if (err.message === "A user with the given username is already registered") {
-                req.flash('error', 'Username already used');
-                res.redirect("/register");
-            } else if (err.message === "No username was given") {
-                req.flash('error', 'Username field was empty!');
-                res.redirect("/register");
-            } else {
-                req.flash('error', 'Password field was empty!');
-                res.redirect("/register");
-            }
+        if (req.body.username.includes(" ")) {
+            req.flash('error', 'Use underscores for username instead of spaces');
+            res.redirect("/register");
         } else {
-            console.log("registration successful");
-            passport.authenticate("local")(req , res , () => {
-                res.redirect("/users/" + req.body.username);
+            User.register({username: req.body.username}, req.body.password , (err , user) => {
+                if (err) {
+                    console.log("registration err");
+                    console.log("error message: " + err.message);
+                    if (err.message === "A user with the given username is already registered") {
+                        req.flash('error', 'Username already used');
+                        res.redirect("/register");
+                    } else if (err.message === "No username was given") {
+                        req.flash('error', 'Username field was empty!');
+                        res.redirect("/register");
+                    } else {
+                        req.flash('error', 'Password field was empty!');
+                        res.redirect("/register");
+                    }
+                } else {
+                    console.log("registration successful");
+                    passport.authenticate("local")(req , res , () => {
+                        res.redirect("/users/" + req.body.username);
+                    });
+                }
             });
         }
-    });
 });
 
 app.route("/login")

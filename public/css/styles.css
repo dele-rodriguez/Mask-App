@@ -266,10 +266,11 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 .flash-div > p {
     font-family: "Montserrat";
-    color: #DBC8CA;
+    color: rgba(201, 77, 77, 0.938);
     font-size: 20px;
 }
 .user-div {
