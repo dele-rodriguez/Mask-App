@@ -242,7 +242,7 @@ app.route("/users/:username/sendmask")
                                 })
                                 usersInfo.save();
 
-                                req.flash("success" , "You are the first person to message this user");
+                                req.flash("success" , "Your message has been sent. Sign Up to get your dare link!🎭");
                                 res.redirect("/users/" + req.params.username + "/sendmask");
                             })
                             .catch((err) => {
@@ -257,7 +257,7 @@ app.route("/users/:username/sendmask")
                         if (req.body.maskMessage.length > 0) {
                             foundMask.maskMessages.push({maskMessage: req.body.maskMessage});
                             foundMask.save().then(() => {
-                                req.flash("success" , "Your new message has been sucessfully sent!");
+                                req.flash("success" , "Your message has been sent. Sign Up to get your own dare link!🎭");
                                 res.redirect("/users/" + req.params.username + "/sendmask");
                             });
                         } else{
