@@ -4,6 +4,7 @@
   "description": "I want to make an annonymous messenger website called masked",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Josemaria Olabamidele",
